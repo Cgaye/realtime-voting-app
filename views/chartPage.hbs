@@ -58,7 +58,7 @@
 
 $(".hiddenElements").hide();
         
-var socket = io.connect();      
+var socket = /*global io*/io.connect();      
 
 
 
@@ -171,7 +171,7 @@ socket.on('dataChanged', function (objectToSend) {
 
 function initLine (){
      ctx = $("#myChart").get(0).getContext("2d");  
-     myNewChart = new Chart(ctx).Bar(data);    
+     myNewChart = new /*global Chart*/Chart(ctx).Bar(data);    
     
      ctxReasonOne = $("#reasonChartOne").get(0).getContext("2d");  
      myReasonOneChart = new Chart(ctxReasonOne).Bar(dataReasonOne);    
