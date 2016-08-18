@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+
+<html>
+    
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src = "/socket.io/socket.io.js"></script>
+  
+<div class = 'container'>
+ 
+  <div class = 'chooseToVote'>
+    <a  id = 'votingOptions' href = '/getPolls'>Click Here for list of Polls</a>
+    <br>
+    <br>
+    <div>
+      <article class = 'currentOptions'>
+        {{# each polls}}
+            
+     <form action = "/pollOptionsScreen" method = 'post' >
+            <button formmethod="post" formaction="/pollOptionsScreen" class = 'polls' value = '{{this.pollName}}' name = '{{this.pollName}}'>{{this.pollName}}</button>
+        </form>
+        <br>   
+        {{/each}}
+        
+      </article>
+    </div>
+    
+    <button class = 'btn btn-primary createPoll' id = 'createPoll'>Create New Poll</button>
+    
+    <form class = newPollArea action = '/pollSubmit' method = 'post'>
+      Poll Name: <br>
+      <input type = 'text' id = 'pollName' class = 'pollName' name = 'pollName'> <br> <br>
+      Poll Options: <br>
+      <input type = 'text' id = 'pollOptions' class = 'pollOptions' name = 'pollOptions'> <br>
+      <input type = 'text' id = 'pollOptions' class = 'pollOptions' name = 'pollOptions'> <br>
+      Poll Reasons: <br>
+      <input type = 'text' id = 'pollReasons' class = 'pollReasons' name = 'pollReasons'> <br>
+      <input type = 'text' id = 'pollReasons' class = 'pollReasons' name = 'pollReasons'> <br>
+      <input type = 'text' id = 'pollReasons' class = 'pollReasons' name = 'pollReasons'> <br>
+      
+      <button type = "submit" class = 'btn-primary btn-default pollSubmitButton'>Submit</button>
+      
+    </form>
+    
+  </div>
+</div>
+
+<script>
+$/*global $*/(document).ready(function() {
+    
+    $('.newPollArea').hide();
+  
+    $('#createPoll').on('click', function(){
+       $('.newPollArea').show();
+       
+    });
+       
+     $('.pollSubmitButton').on('click', function(){
+        $('.newPollArea').hide(); 
+     });
+     
+    $('.polls').on('click', function(){
+           
+          $(this).attr('id','id');
+          $(this).attr('name', 'id');
+         $(this).submit();
+    });
+});  
+</script>
+</html>
+ 

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src = "/socket.io/socket.io.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+  
+  <div class = 'container'>
+      {{#chartInfo}}
+      <div class = 'chartFinalTitle'> Vote totals for: <br> {{pollName}}</div>
+      {{/chartInfo}}
+  <div class = "chartWrapper">
+<canvas id="myChart" width="500" height="400"></canvas>
+  
+</div>
+<div class = 'reasonTitleText'>Reasons for those who chose Option One: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Reasons for those who chose Option Two</div>
+    <div class = "chartWrapper">
+<canvas id="reasonChartOne" width="500" height="400"></canvas>
+<canvas id="reasonChartTwo" width="500" height="400"></canvas>
+  
+</div>
+
+
+
+   
+</div>
+<div class = 'hiddenElements'>
+    {{#chartInfo}}
+     {{#each pollOptions}}
+     <input type = 'text' class = 'pollOptions' id = 'pollOptions{{@index}}' value = '{{this}}'>
+     {{/each}}
+     
+     {{#each pollReasons}}
+      <input type = 'text' class = 'pollReasons' value = '{{this}}' id = 'pollReasons{{@index}}'>
+     {{/each}}
+     
+     {{#each pollTotals}}
+      <input type = 'text' class = 'pollTotals' value = '{{this}}' id = 'pollTotals{{@index}}'>
+     {{/each}}
+     
+     {{#each reasonTotalsOne}}
+      <input type = 'text' class = 'reasonTotals' value = '{{this}}' id = 'reasonTotalsOne{{@index}}'>
+     {{/each}}
+     
+     {{#each reasonTotalsTwo}}
+      <input type = 'text' class = 'reasonTotals' value = '{{this}}' id = 'reasonTotalsTwo{{@index}}'>
+     {{/each}}
+     
+    <input type = "text" id = 'idSelection' name = "idSelection" value = '{{pollName}}'></input>
+  
+  {{/chartInfo}}
+  
+ 
+  
+</div>
+
+<script>
+    $/*global $*/(document).ready(function(){ 
+
+$(".hiddenElements").hide();
+        
+var socket = io.connect();      
+
+
+
+var pollName = $("#idSelection").val();
+
+
+
+var pollOne = $("#pollTotals0").val();
+var pollTwo = $("#pollTotals1").val();
+
+var pollOptionOne = $("#pollOptions0").val();
+var pollOptionTwo = $("#pollOptions1").val();
+
+var pollReasonOne = $("#pollReasons0").val();
+var pollReasonTwo = $("#pollReasons1").val();
+var pollReasonThree = $("#pollReasons2").val();
+
+var reasonTotalOne1 = $("#reasonTotalsOne0").val();
+var reasonTotalOne2 = $("#reasonTotalsOne1").val();
+var reasonTotalOne3 = $("#reasonTotalsOne2").val();
+
+var reasonTotalTwo1 = $("#reasonTotalsTwo0").val();
+var reasonTotalTwo2 = $("#reasonTotalsTwo1").val();
+var reasonTotalTwo3 = $("#reasonTotalsTwo2").val();
+
+
+
+
+
+var ctx; //$("#myChart").get(0).getContext("2d");  
+
+  
+var data = {
+  labels : [pollOptionOne, pollOptionTwo],
+  datasets : [
+    {
+      fillColor : "rgba(220,0,22,0.5)",
+      strokeColor : "rgba(220,220,220,1)",
+      data : [pollOne,pollTwo,0]
+    }
+  ]
+};
+
+
+
+
+
+var myNewChart; //new Chart(ctx).Bar(data);
+
+
+
+var ctxReasonOne; //$("#reasonChartOne").get(0).getContext("2d");  
+
+  
+var dataReasonOne = {
+  labels : [pollReasonOne, pollReasonTwo, pollReasonThree],
+  datasets : [
+    {
+      fillColor : "rgba(220,0,22,0.5)",
+      strokeColor : "rgba(220,220,220,1)",
+      data : [reasonTotalOne1,reasonTotalOne2,reasonTotalOne3,0]
+    }
+  ]
+};
+
+
+
+
+
+var myReasonOneChart; //new Chart(ctxReasonOne).Bar(dataReasonOne);
+
+
+var ctxReasonTwo; //$("#reasonChartTwo").get(0).getContext("2d");  
+
+  
+var dataReasonTwo = {
+  labels : [pollReasonOne, pollReasonTwo, pollReasonThree],
+  datasets : [
+    {
+      fillColor : "rgba(220,0,22,0.5)",
+      strokeColor : "rgba(220,220,220,1)",
+      data : [reasonTotalTwo1,reasonTotalTwo2,reasonTotalTwo3,0]
+    }
+  ]
+};
+
+
+
+
+
+var myReasonTwoChart; //new Chart(ctxReasonTwo).Bar(dataReasonTwo);
+
+
+socket.emit('readyForUpdate', pollName);
+
+socket.on('dataChanged', function (objectToSend) {
+    
+    if(objectToSend.pollNameSent == pollName){
+    
+    data.datasets[0].data = objectToSend.mainVotes;
+    dataReasonOne.datasets[0].data = objectToSend.reasonOneVotes;
+    dataReasonTwo.datasets[0].data = objectToSend.reasonTwoVotes;
+    
+     data.datasets[0].data[2] = 0;
+     dataReasonOne.datasets[0].data[3] = 0;
+     dataReasonTwo.datasets[0].data[3] = 0;
+			initLine();
+    }
+		});
+
+function initLine (){
+     ctx = $("#myChart").get(0).getContext("2d");  
+     myNewChart = new Chart(ctx).Bar(data);    
+    
+     ctxReasonOne = $("#reasonChartOne").get(0).getContext("2d");  
+     myReasonOneChart = new Chart(ctxReasonOne).Bar(dataReasonOne);    
+    
+     ctxReasonTwo = $("#reasonChartTwo").get(0).getContext("2d");
+     myReasonTwoChart = new Chart(ctxReasonTwo).Bar(dataReasonTwo);
+     console.log('we made it here');
+}
+
+ 
+       
+    });
+       
+
+
+
+});
+  
+
+
+</script>
+    
+</html>

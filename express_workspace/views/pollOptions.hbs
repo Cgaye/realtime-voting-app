@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src = "/socket.io/socket.io.js"></script>
+
+<div class = 'container'>
+    
+    <div class = 'forCSS'>
+ {{#chosethis}}
+    <div class = 'pollNameTitle'>{{pollName}}</div>
+    
+    <div class = 'votingOptionsText'>Voting Options:</div> 
+     <form action = '/chart' method = 'post' id = 'pollForm'>
+     <input type = "text" id = 'idSelection' name = "idSelection" value = '{{pollName}}'></input>
+     
+     <div class="btn-group" data-toggle="buttons" id = 'vote'>
+      {{#each pollOptions}}
+  <label class="btn btn-primary btnForCss">
+    <input type="radio" autocomplete="off" value = '{{@index}}'> {{this}}
+  </label>
+      {{/each}}
+   </div> <br> <br>
+     <div class = 'reasonsText'>Reasons:</div>
+      <div class = 'btn-group' data-toggle = 'buttons' id = 'reasonVote'>
+     {{#each pollReasons}}
+     <label class = 'btn btn-sm btn-primary'>
+     <input type = 'radio' autocomplete = 'off' class = 'reason' value = '{{@index}}'>{{this}}
+     </label> 
+     {{/each}}
+      </div> <br> <br>
+      <button class = 'btn btn-primary btn-lg' id = 'sub' formmethod="post" formaction="/chart">Submit</button>  
+      </form> 
+     
+ {{/chosethis}}
+   </div>
+
+  
+</div>
+
+<script>
+$/*global $*/(document).ready(function() {
+ 
+$("#idSelection").hide();
+
+
+
+$('#sub').on('click', function(){
+      $("#vote input[type='radio']:checked").attr('id', 'id');
+      $("#vote input[type='radio']:checked").attr('name', 'id');
+      $("#reasonVote input[type='radio']:checked").attr('id', 'idReason');
+      $("#reasonVote input[type='radio']:checked").attr('name', 'idReason');
+      $(this).submit();
+  
+
+});
+  
+});  
+</script>
+
+</html>

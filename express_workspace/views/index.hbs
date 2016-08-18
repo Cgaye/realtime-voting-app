@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src = "/socket.io/socket.io.js"></script>
+  
+<div class = 'container'>
+  <div class = 'titleText'>Realtime Voting <br> (For Chrome)</div>
+  <br>
+  
+  <form action="/userSubmit" method = 'post' class = 'userNameArea'>
+    Username: <br>
+    <input type = "text" id = "userNameInput" name = "userNameInput"> <br><br>
+    Password: <br>
+    <input type = "text" id = "passwordInput" name = "passwordInput">
+    <br>
+    <button type = "submit" class = 'btn-primary btn-default userSubmitButton'>Submit</button>
+  </form>
+  <br>
+   <p class = 'explanationText'>This app updates votes in real time using Socket IO. This means that after voting on a poll the charts will update themselves, and continue to update as more people vote. To test this try the following:
+  
+  <br>
+  1. Enter a username or password
+    <br>
+    (Note:Any username and password will work at the moment, as the verification has been taken out to allow ease of use. The username and passwords entered will still be stored on the server)
+    <br>
+    2. Create a new poll or choose one of the polls already created. 
+    <br>
+    3.Vote on chosen poll.You may also vote on a reason for your vote if desired. You are allowed to not vote if you'd just like to skip to the results page.
+        <br>
+        
+        4. Open a new tab or page and repeat steps 1-3. If you go back to your original page, you should see that the poll has updated with the new info.
+  </p>
+  
+ 
+</div>
+
+<script>
+$/*global $*/(document).ready(function() {
+  
+  
+
+});
+</script>
+</html>
+ 

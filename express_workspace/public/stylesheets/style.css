@@ -1,0 +1,81 @@
+body {
+background-image: url('http://cdn.backgroundhost.com/backgrounds/subtlepatterns/always_grey.png');
+}
+
+.container{
+ width: 75%;
+ height: 850px; 
+ text-align: center; 
+ border: 6px solid black;  
+ background-image: url("http://cdn.backgroundhost.com/backgrounds/subtlepatterns/blu_stripes.png");
+ margin-top: 5%;  
+ margin-bottom: 5%;
+ overflow: auto;
+}
+
+.titleText{
+  margin-top: 90px;
+  font-size: 3.5em;
+  color: #ff9933;
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+.explanationText{
+ font-size: 1.3em;  
+ margin-top: 15px; 
+}
+
+.userNameArea{
+  margin-top: 05%;
+  font-size: 2.0em;
+}
+
+.newPollArea{
+  overflow: auto;
+}
+
+
+#votingOptions{
+  margin-top: 50px;
+  font-size: 2.5em;
+}
+
+.pollNameTitle{
+  margin-top: 90px;
+  font-size: 4.0em;
+  margin-bottom:50px;
+  color: #ff9933;
+  font-family: Impact, Charcoal, sans-serif;
+  
+  
+}
+
+.votingOptionsText{
+  font-size: 2.8em;
+  color: #ff9933;
+  
+}
+
+.reasonsText{
+  font-size:2.8em;  
+  color: #ff9933;
+  
+}
+
+.btnForCss{
+  font-size:2.0em;
+}
+
+.chartFinalTitle{
+  margin-top:45px;
+  font-size:2.8em;
+  color: #ff9933;
+  font-family: Impact, Charcoal, sans-serif;
+  
+}
+
+.reasonTitleText{
+  font-size:1.8em;
+  color: #ff9933;
+  font-family: Impact, Charcoal, sans-serif;
+}
