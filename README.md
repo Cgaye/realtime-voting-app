@@ -1,2 +1,0 @@
-# realtime-voting-app
-# votingApp
