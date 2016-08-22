@@ -132,5 +132,11 @@ pollDataToSend.update(
 
  });
  
+ 
+ 
+});
+
+router.post('/returnBack', function(req, res, next) {
+     res.render('pollScreen');
 });
 module.exports = router;

@@ -5,6 +5,11 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
   
   <div class = 'container'>
+      
+  <form action="/returnBack" method = 'post' class = 'userNameArea'>
+    
+    <button type = "submit" class = 'btn-primary btn-default'>Submit</button>
+  </form>
       {{#chartInfo}}
       <div class = 'chartFinalTitle'> Vote totals for: <br> {{pollName}}</div>
       {{/chartInfo}}
