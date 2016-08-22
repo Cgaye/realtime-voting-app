@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
-var db = require('monk')('mongodb://<applet>:<dodgers47>@ds035603.mlab.com:35603/voting-app-db');
+var db = require('monk')('mongodb://applet:dodgers47@ds035603.mlab.com:35603/voting-app-db');
 var pollDataToSend = db.get('polldata');
 var url = 'mongodb://localhost:27017/vote';
 
